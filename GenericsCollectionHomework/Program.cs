@@ -21,22 +21,32 @@ namespace GenericsCollectionHomework
         public void Run()
         {
             CollectionLab lab = new CollectionLab();
+            Console.WriteLine("Lab1: ");
             lab.InitializeCubicArray();
-            lab.PrintCubicArray(1, 1, 1);
-            lab.PrintCubicArray(10, 10, 10);
+            lab.PrintCubicArray(0, 0, 0);
+            lab.PrintCubicArray(9, 9, 9);
             lab.PrintCubicArray(2, 3, 7);
+            Console.WriteLine();
 
+            Console.WriteLine("Lab2: ");
             lab.InitializeList();
             Console.WriteLine(lab.SumOfList());
+            Console.WriteLine();
 
+            Console.WriteLine("Lab3: ");
             lab.InitializeDictionary();
             lab.PrintCountryDictionary();
+            Console.WriteLine();
 
+            Console.WriteLine("Lab4: ");
             lab.InitializeQueue();
             Console.WriteLine(lab.SumOfQueue());
+            Console.WriteLine();
 
+            Console.WriteLine("Lab5: ");
             lab.InitializeStack();
-
+            Console.WriteLine(lab.SumOfStack());
+            Console.WriteLine();
         }
     }
 
@@ -50,14 +60,14 @@ namespace GenericsCollectionHomework
 
         public void InitializeCubicArray()
         {
-            cubicArray = new int[11, 11, 11];
-            for (int i = 1; i < cubicArray.GetLength(0); i++)
+            cubicArray = new int[10, 10, 10];
+            for (int i = 0; i < cubicArray.GetLength(0); i++)
             {
-                for (int j = 1; j < cubicArray.GetLength(1); j++)
+                for (int j = 0; j < cubicArray.GetLength(1); j++)
                 {
-                    for (int k = 1; k < cubicArray.GetLength(2); k++)
+                    for (int k = 0; k < cubicArray.GetLength(2); k++)
                     {
-                        cubicArray[i, j, k] = i * j * k;
+                        cubicArray[i, j, k] = (i + 1) * (j + 1) * (k + 1);
                     }
                 }
             }
@@ -114,9 +124,13 @@ namespace GenericsCollectionHomework
         public void InitializeQueue()
         {
             queue01 = new Queue<int>();
+            int count = 0;
             foreach (int i in cubicArray)
             {
+                if (count == 100)
+                    break;
                 queue01.Enqueue(i);
+                count++;
             }
             for (int i = 0; i < 10; i++)
             {
@@ -136,15 +150,24 @@ namespace GenericsCollectionHomework
         public void InitializeStack()
         {
             stack01 = new Stack<int>();
-            for (int i = 0; i < 100; i++)
+            int count = 0;
+            foreach (int i in cubicArray)
             {
+                if (count == 100)
+                    break;
                 stack01.Push(i);
             }
+        }
 
+        public int SumOfStack()
+        {
+            int sum = 0;
             for (int i = 0; i < 10; i++)
             {
+                sum += stack01.Peek();
                 stack01.Pop();
             }
+            return sum;
         }
     }
 }
